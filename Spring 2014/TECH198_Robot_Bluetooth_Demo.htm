@@ -1,0 +1,138 @@
+<pre>
+#define&nbsp;M1A&nbsp;3
+#define&nbsp;M1B&nbsp;5
+#define&nbsp;M2A&nbsp;6
+#define&nbsp;M2B&nbsp;9
+
+<span style="color: #CC6600;">int</span> speedStraight = 255;
+<span style="color: #CC6600;">int</span> speedTurn = 150;
+
+<span style="color: #CC6600;">int</span> motorPin[4]={3,5,6,9};
+
+<span style="color: #CC6600;">void</span> motor(<span style="color: #CC6600;">int</span> motorSelect, <span style="color: #CC6600;">int</span> motorDirection, <span style="color: #CC6600;">int</span> motorSpeed)
+{
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(motorSelect == 0)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(motorDirection == 0)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(motorPin[0],0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(motorPin[1],0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(20);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">analogWrite</span>(motorPin[0],motorSpeed);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(motorDirection == 1)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(motorPin[0],0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(motorPin[1],0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(20);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">analogWrite</span>(motorPin[1],motorSpeed);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(motorSelect == 1)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(motorDirection == 0)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(motorPin[2],0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(motorPin[3],0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(50);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">analogWrite</span>(motorPin[2],motorSpeed);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(motorDirection == 1)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(motorPin[2],0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(motorPin[3],0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(50);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">analogWrite</span>(motorPin[3],motorSpeed);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+}
+
+<span style="color: #CC6600;">void</span> manualControlBluetooth(<span style="color: #CC6600;">char</span> command)
+{
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'F'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Forward</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,1,speedStraight);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,1,speedStraight);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'B'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Back</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,0,speedStraight);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,0,speedStraight);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'L'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Left</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,0,speedTurn);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,1,speedTurn);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'R'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Right</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,1,speedTurn);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,0,speedTurn);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'I'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Forward Right</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,1,speedStraight);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,1,speedTurn);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'G'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Forward Left</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,1,speedTurn);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,1,speedStraight);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'J'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Back Right</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,0,speedStraight);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,0,speedTurn);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'H'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Back Left</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,0,speedTurn);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,0,speedStraight);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(command == <span style="color: #006699;">'S'</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Stop</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,0,0);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,0,0);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span>
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">//Stop</span>
+&nbsp;&nbsp;&nbsp;&nbsp;motor(0,0,0);
+&nbsp;&nbsp;&nbsp;&nbsp;motor(1,0,0);
+&nbsp;&nbsp;}
+}
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>()
+{
+&nbsp;&nbsp;<span style="color: #CC6600;">for</span>(<span style="color: #CC6600;">int</span> i = 0; i &lt; 4; i++)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">pinMode</span>(motorPin[i],<span style="color: #006699;">OUTPUT</span>);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">begin</span>(115200);
+&nbsp;&nbsp;
+&nbsp;&nbsp;motor(0,0,0);
+&nbsp;&nbsp;motor(1,0,0);
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(100);
+}
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>()
+{
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">available</span>() &gt; 0)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">char</span> reading = <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">read</span>();
+&nbsp;&nbsp;&nbsp;&nbsp;manualControlBluetooth(reading);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(20);
+&nbsp;&nbsp;}
+}
+
+</pre>
