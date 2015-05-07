@@ -1,0 +1,51 @@
+<pre>
+<span style="color: #7E7E7E;">/*</span>
+<span style="color: #7E7E7E;">Tech198_demo</span>
+<span style="color: #7E7E7E;">Author:&nbsp;Alberto&nbsp;Tam&nbsp;Yong</span>
+<span style="color: #7E7E7E;">Date:&nbsp;25&nbsp;November&nbsp;2013</span>
+
+<span style="color: #7E7E7E;">Sample&nbsp;code&nbsp;for&nbsp;Tech&nbsp;198&nbsp;Arduino&nbsp;Library</span>
+<span style="color: #7E7E7E;">1.&nbsp;Declare&nbsp;Library</span>
+<span style="color: #7E7E7E;">2.&nbsp;Select&nbsp;four&nbsp;pins&nbsp;(must&nbsp;be&nbsp;pins&nbsp;with&nbsp;capable&nbsp;of&nbsp;PWM)</span>
+<span style="color: #7E7E7E;">3.&nbsp;Syntax&nbsp;for&nbsp;motor()&nbsp;function:</span>
+<span style="color: #7E7E7E;">&nbsp;&nbsp;&nbsp;&nbsp;motor(&nbsp;&lt;motorSelect&gt;&nbsp;,&nbsp;&lt;motorDirection&gt;&nbsp;,&nbsp;&lt;motorSpeed&gt;&nbsp;);</span>
+<span style="color: #7E7E7E;">&nbsp;&nbsp;&nbsp;&nbsp;motor(&nbsp;&lt;0&nbsp;or&nbsp;1&gt;,&nbsp;&lt;0&nbsp;or&nbsp;1&gt;,&nbsp;&lt;0&nbsp;to&nbsp;255&gt;&nbsp;);</span>
+<span style="color: #7E7E7E;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span style="color: #7E7E7E;">Examples:</span>
+<span style="color: #7E7E7E;">motor(0,0,0);&nbsp;//First&nbsp;motor,&nbsp;forward,&nbsp;speed&nbsp;=&nbsp;0&nbsp;out&nbsp;of&nbsp;255;</span>
+<span style="color: #7E7E7E;">motor(0,1,128);&nbsp;//First&nbsp;motor,&nbsp;reverse,&nbsp;speed&nbsp;=&nbsp;128&nbsp;out&nbsp;of&nbsp;255;</span>
+<span style="color: #7E7E7E;">motor(1,0,255);&nbsp;//Second&nbsp;motor,&nbsp;forward,&nbsp;speed&nbsp;-&nbsp;255&nbsp;out&nbsp;of&nbsp;255;</span>
+<span style="color: #7E7E7E;">*/</span>
+
+<span style="color: #7E7E7E;">//Declaring&nbsp;Library</span>
+#include&nbsp;&lt;Tech198.h&gt;
+
+<span style="color: #7E7E7E;">//Motor&nbsp;Pins</span>
+<span style="color: #7E7E7E;">//Motor&nbsp;1&nbsp;signals&nbsp;connected&nbsp;to&nbsp;pins&nbsp;3&nbsp;and&nbsp;5</span>
+<span style="color: #7E7E7E;">//Motor&nbsp;2&nbsp;signals&nbsp;connected&nbsp;to&nbsp;pins&nbsp;6&nbsp;and&nbsp;9</span>
+Tech198&nbsp;robot(3,5,6,9);
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>()
+{
+}
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>()
+{
+&nbsp;&nbsp;<span style="color: #7E7E7E;">//Run motor 1</span>
+&nbsp;&nbsp;robot.motor(0,1,128);&nbsp;<span style="color: #7E7E7E;">//Forwards</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(2000);
+&nbsp;&nbsp;robot.motor(0,0,128);&nbsp;<span style="color: #7E7E7E;">//Backwards</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(2000);
+&nbsp;&nbsp;robot.motor(0,0,0);&nbsp;<span style="color: #7E7E7E;">//Stop</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(1000);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #7E7E7E;">//Run motor 2</span>
+&nbsp;&nbsp;robot.motor(1,1,128);&nbsp;<span style="color: #7E7E7E;">//Forwards</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(2000);
+&nbsp;&nbsp;robot.motor(1,0,128);&nbsp;<span style="color: #7E7E7E;">//Backwards</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(2000);
+&nbsp;&nbsp;robot.motor(1,0,0);&nbsp;<span style="color: #7E7E7E;">//Stop</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(1000);
+}
+
+</pre>
